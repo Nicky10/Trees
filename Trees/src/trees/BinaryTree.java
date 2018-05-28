@@ -123,23 +123,37 @@ public class BinaryTree {
             else if(counter == 2)
             {
                 Node nodo = temp.right;
-                Node nodopadre = temp;
-                while(nodo.left!=null)
+                Node nodopadre = nodo;
+                
+                if(nodo.equals(root))
+                {
+                    if(left)
+                        root.left = nodo;
+                    else
+                        root.right = nodo;
+                }
+                else
+                {
+                    while(nodo.left!=null)
                 {
                     nodopadre = nodo;
                     nodo = nodo.left;
                 }
-                if (nodo.right!=null)
-                    nodopadre.left = nodo.right;
                 
-                nodo.right = temp.right;
+                if(!nodopadre.equals(nodo))
+                {
+                    if (nodo.right!=null)
+                        nodopadre.left = nodo.right;
+                
+                    nodo.right = temp.right;
+                }
                 nodo.left = temp.left;
                 
                 if(left)
                     parent.left = nodo;
                 else
                     parent.right = nodo;
-                
+                }   
             }
         }
     }
@@ -153,7 +167,7 @@ public class BinaryTree {
     {
         if(node != null)
         {
-        System.out.print(node.toString());
+        System.out.print(node.toString_letter());
         preorder_print(node.left);
         preorder_print(node.right);
         }
@@ -165,7 +179,7 @@ public class BinaryTree {
         {
         posorder_print(node.left);
         posorder_print(node.right);
-        System.out.print(node.toString());
+        System.out.print(node.toString_letter());
         }
     }
     
@@ -174,7 +188,7 @@ public class BinaryTree {
         if(node != null)
         {
         inorder_print(node.left);
-        System.out.print(node.toString());
+        System.out.print(node.toString_letter());
         inorder_print(node.right);
         }
     }
@@ -191,9 +205,8 @@ public class BinaryTree {
         bt.insert(100);
         bt.insert(85);
         
-        bt.delete(74);
         
-        bt.preorder_print(bt.root);
+        bt.inorder_print(bt.root);
         
     }
     
